@@ -36,7 +36,7 @@ public class ServiceManager {
 
     }
 
-    private final Properties applicationProperties = new Properties();// сохраняем в файл resources/application.properties
+    private final Properties applicationProperties = new Properties();// сохраняем в файл resources/application.properties глобальные настройки проекта
     private final ProductService productService; // создается только единожды в ServiceManager
     private final OrderService orderService;
     private ServiceManager(ServletContext context) {// будут созданы бизнес сервисы

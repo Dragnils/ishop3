@@ -6,29 +6,26 @@ package net.devstudy.ishop.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-@WebFilter({"/trim", "/trim-params.html"})
-public class TrimResponseFilter implements Filter {
+@WebFilter(filterName = "TrimResponseFilter")
+public class TrimResponseFilter extends AbstractFilter {
+
+
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-    }
-
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-        TrimResponse response = new TrimResponse((HttpServletResponse) resp);
+    public void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws IOException, ServletException {
+        TrimResponse response = new TrimResponse(resp);
         chain.doFilter(req, response);
         response.complete();
     }
 
-    @Override
-    public void destroy() {
-    }
+
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
