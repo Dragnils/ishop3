@@ -57,13 +57,13 @@
 <div id="productCatalog" class="panel panel-success collapse">
     <div class="panel-heading">Product catalog</div>
     <div class="list-group">
-    <a href="${pageContext.request.contextPath}/products" class="list-group-item"> <span class="badge">78</span> E-book
-    </a> <a href="${pageContext.request.contextPath}/products" class="list-group-item"> <span class="badge">75</span> Mp3-player
-    </a> <a href="${pageContext.request.contextPath}/products" class="list-group-item"> <span class="badge">110</span> Notebook
-    </a> <a href="${pageContext.request.contextPath}/products" class="list-group-item"> <span class="badge">113</span> Phone
-    </a> <a href="${pageContext.request.contextPath}/products" class="list-group-item"> <span class="badge">216</span> Smartphone
-    </a> <a href="${pageContext.request.contextPath}/products" class="list-group-item"> <span class="badge">95</span> Smartwatch
-    </a> <a href="${pageContext.request.contextPath}/products" class="list-group-item"> <span class="badge">211</span> Tablet
+    <a href="${pageContext.request.contextPath}/products/e-book" class="list-group-item"> <span class="badge">78</span> E-book
+    </a> <a href="${pageContext.request.contextPath}/products/mp3" class="list-group-item"> <span class="badge">75</span> Mp3-player
+    </a> <a href="${pageContext.request.contextPath}/products/notepad" class="list-group-item"> <span class="badge">110</span> Notebook
+    </a> <a href="${pageContext.request.contextPath}/products/phone" class="list-group-item"> <span class="badge">113</span> Phone
+    </a> <a href="${pageContext.request.contextPath}/products/smartphone" class="list-group-item"> <span class="badge">216</span> Smartphone <!-- /smartphone будет извлектася из БД с помощью сервлета ProductsByCategoryMoreController-->
+    </a> <a href="${pageContext.request.contextPath}/products/smartwatch" class="list-group-item"> <span class="badge">95</span> Smartwatch
+    </a> <a href="${pageContext.request.contextPath}/products/tablet" class="list-group-item"> <span class="badge">211</span> Tablet
     </a>
     </div>
 </div>
