@@ -60,18 +60,44 @@
 			$('#addProductPopup .cost').text(priceStr);
 		}
 	};
-	var loadMoreProducts = function (){// настройка поведения кнопки при нажатии, должна возвращать еще картинки те же самые
-		$('#loadMore').addClass('hidden');
-		$('#loadMoreIndicator').removeClass('hidden');
+
+
+	var convertButtonToLoader = function (btn, btnClass) {
+		btn.removeClass(btnClass);
+		btn.removeClass('btn');
+		btn.addClass('load-indicator');
+		var text = btn.text();
+		btn.text('');
+		btn.attr('data-btn-text', text);
+		btn.off('click');
+	};
+	var convertLoaderToButton = function (btn, btnClass, actionClick) {
+		btn.removeClass('load-indicator');
+		btn.addClass('btn');
+		btn.addClass(btnClass);
+		btn.text(btn.attr('data-btn-text'));
+		btn.removeAttr('data-btn-text');
+		btn.click(actionClick);
+	};
+
+	var loadMoreProducts = function (){ // настройка поведения кнопки при нажатии
+		var btn = $('#loadMore');
+		convertButtonToLoader(btn, 'btn-success');
+		var url = '/ajax/html/more' + location.pathname + '?' + location.search.substring(1);
 		$.ajax({
-			url: '/ajax/html/more/products',
-			success: function (html) {
-				$('#productList .container').append(html); //обращаемся к id products.jsp
-				$('#loadMoreIndicator').addClass('hidden');
-				$('#loadMore').removeClass('hidden');
+			url : url,
+			success : function(html) {
+				$('#productList .text-center').prepend(html);
+				convertLoaderToButton(btn, 'btn-success', loadMoreProducts);
+			},
+			error : function(data) {
+				convertLoaderToButton(btn, 'btn-success', loadMoreProducts);
+				alert('Error');
 			}
 		});
 	};
+
+
 	var initSearchForm = function (){
 		$('#allCategories').click(function(){
 			$('.categories .search-option').prop('checked', $(this).is(':checked'));

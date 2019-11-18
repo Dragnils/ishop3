@@ -1,5 +1,6 @@
-package net.devstudy.ishop.servlet;
+package net.devstudy.ishop.servlet.page;
 
+import net.devstudy.ishop.servlet.AbstractController;
 import net.devstudy.ishop.util.RoutingUtils;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @WebServlet("/products")
-public class AllProductsController extends AbstractController{
+public class AllProductsController extends AbstractController {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {// наш контроллер отвечает за отображение всех продуктов
                            //Доступ из сервлета к  бизнес сервисам
