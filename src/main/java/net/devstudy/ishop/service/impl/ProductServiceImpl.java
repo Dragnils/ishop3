@@ -1,5 +1,7 @@
 package net.devstudy.ishop.service.impl;
 
+import net.devstudy.ishop.entity.Category;
+import net.devstudy.ishop.entity.Producer;
 import net.devstudy.ishop.entity.Product;
 import net.devstudy.ishop.exception.InternalServerErrorException;
 import net.devstudy.ishop.jdbc.JDBCUtils;
@@ -34,5 +36,20 @@ class ProductServiceImpl implements ProductService { // реализация
         }catch (SQLException e){
             throw new InternalServerErrorException("Can't execute sql query: " + e.getMessage(), e);// создали свой класс исключений для того чтобы оно пробрасывалось в наш фильтр ErrorHandlerFilter и логгировалось
         }
+    }
+
+    @Override
+    public List<Product> listProductsByCategory(String categoryUrl, int page, int limit) {
+        return null;
+    }
+
+    @Override
+    public List<Category> listAllCategory() {
+        return null;
+    }
+
+    @Override
+    public List<Producer> listAllProducer() {
+        return null;
     }
 }
