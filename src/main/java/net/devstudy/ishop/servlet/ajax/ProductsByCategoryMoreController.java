@@ -19,8 +19,10 @@ public class ProductsByCategoryMoreController extends AbstractController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> products = getProductService().listAllProducts(2 , Constants.MAX_PRODUCTS_PER_HTML_PAGE); //get Products from database, мы должны получить из БД список всех продуктов с помощью класса Product
         String categoryUrl = req.getRequestURI().substring(SUBSTRING_INDEX);
+        List<Product> products = getProductService().listProductsByCategory(categoryUrl,2 , Constants.MAX_PRODUCTS_PER_HTML_PAGE); //get Products from database, мы должны получить из БД список всех категорий
+        req.setAttribute("products", products);
         RoutingUtils.forwardToFragment("product-list.jsp", req, resp);
+
     }
 }

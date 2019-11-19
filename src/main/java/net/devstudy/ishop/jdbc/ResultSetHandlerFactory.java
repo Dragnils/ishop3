@@ -1,5 +1,7 @@
 package net.devstudy.ishop.jdbc;
 
+import net.devstudy.ishop.entity.Category;
+import net.devstudy.ishop.entity.Producer;
 import net.devstudy.ishop.entity.Product;
 
 import java.sql.ResultSet;
@@ -23,6 +25,43 @@ public final class ResultSetHandlerFactory {
             return p;
         }
     };
+
+
+    public final static ResultSetHandler<Category> CATEGORY_RESULT_SET_HANDLER = new ResultSetHandler<Category>() {
+        @Override
+        public Category handle(ResultSet rs) throws SQLException {//перобразование из текущей строки ResultSet в объект Category
+            Category c = new Category();
+            c.setId(rs.getInt("id"));
+            c.setName(rs.getString("name"));
+            c.setUrl(rs.getString("url"));
+            c.setProductCount(rs.getInt("produc_count"));
+            return c;
+        }
+    };
+
+    public final static ResultSetHandler<Producer> PRODUCER_RESULT_SET_HANDLER = new ResultSetHandler<Producer>() {
+        @Override
+        public Producer handle(ResultSet rs) throws SQLException { //перобразование из текущей строки ResultSet в объект Producer
+            Producer p = new Producer();
+            p.setId(rs.getInt("id"));
+            p.setName(rs.getString("name"));
+            p.setProductCount(rs.getInt("produc_count"));
+            return p;
+        }
+    };
+
+    public final static ResultSetHandler<Integer> getCountResultSetHandler() {
+        return new ResultSetHandler<Integer>() {
+            @Override
+            public Integer handle(ResultSet rs) throws SQLException {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                } else {
+                    return 0;
+                }
+            }
+        };
+    }
 
     public final static <T> ResultSetHandler<T> getSingleResultSetHandler(final ResultSetHandler<T> oneRowResultSetHandler) { // запрос для одного продукта
         return new ResultSetHandler<T>() {
