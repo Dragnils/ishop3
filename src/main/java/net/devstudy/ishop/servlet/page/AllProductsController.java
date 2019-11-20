@@ -22,6 +22,8 @@ public class AllProductsController extends AbstractController {
                            //Доступ из сервлета к  бизнес сервисам
         List<Product> products = getProductService().listAllProducts(1, Constants.MAX_PRODUCTS_PER_HTML_PAGE); //get Products from database, мы должны получить из БД список всех продуктов с помощью класса Product
         req.setAttribute("products", products);// устанавливаем в атрибуты коллекцию продуктов которые нужно отобразить
+        int totalCount = getProductService().countAllProducts();// для отображения кнопки
+        req.setAttribute("pageCount", getPageCount(totalCount, Constants.MAX_PRODUCTS_PER_HTML_PAGE));
         RoutingUtils.forwardToPage("products.jsp", req, resp);// передаем управление на страницу с помощью метода forwardToPage()
     }
 }

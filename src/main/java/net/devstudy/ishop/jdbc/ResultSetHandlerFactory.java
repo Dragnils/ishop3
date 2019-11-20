@@ -50,7 +50,7 @@ public final class ResultSetHandlerFactory {
         }
     };
 
-    public final static ResultSetHandler<Integer> getCountResultSetHandler() {
+    public final static ResultSetHandler<Integer> getCountResultSetHandler() {// Integer. передаем на countAllProducts класса ProductServiceImpl
         return new ResultSetHandler<Integer>() {
             @Override
             public Integer handle(ResultSet rs) throws SQLException {
@@ -62,6 +62,8 @@ public final class ResultSetHandlerFactory {
             }
         };
     }
+
+
 
     public final static <T> ResultSetHandler<T> getSingleResultSetHandler(final ResultSetHandler<T> oneRowResultSetHandler) { // запрос для одного продукта
         return new ResultSetHandler<T>() {

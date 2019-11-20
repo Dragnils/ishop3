@@ -18,6 +18,13 @@ class ProductServiceImpl implements ProductService { // реализация
 
     private static final ResultSetHandler<List<Product>> productsResultSetHandler =
             ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.PRODUCT_RESULT_SET_HANDLER);// каждую строчку обрабатываем PRODUCT_RESULT_SET_HANDLER
+    private final ResultSetHandler<List<Category>> categoryListResultSetHandler =
+            ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.CATEGORY_RESULT_SET_HANDLER);
+    private final ResultSetHandler<List<Producer>> producerListResultSetHandler =
+            ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.PRODUCER_RESULT_SET_HANDLER);
+
+    private final ResultSetHandler<Integer> countResultSetHandler = ResultSetHandlerFactory.getCountResultSetHandler();
+
 
     private final DataSource dataSource;// для выполнени запросов к БД нам нужен connection
 
@@ -40,16 +47,45 @@ class ProductServiceImpl implements ProductService { // реализация
 
     @Override
     public List<Product> listProductsByCategory(String categoryUrl, int page, int limit) {
-        return null;
+        try (Connection c = dataSource.getConnection()) {
+            int offset = (page - 1) * limit;
+            return JDBCUtils.select(c,
+                    "select p.*, c.name as category, pr.name as producer from product p, category c, producer pr where c.url=? and pr.id=p.id_producer and c.id=p.id_category order by p.id limit ? offset ?",
+                    productsResultSetHandler, categoryUrl, limit, offset);
+        } catch (SQLException e) {
+            throw new InternalServerErrorException("Can't execute sql query: " + e.getMessage(), e);
+        }
     }
 
     @Override
-    public List<Category> listAllCategory() {
-        return null;
+    public List<Category> listAllCategories() {
+        try (Connection c = dataSource.getConnection()) {
+            return JDBCUtils.select(c, "select * from category order by id", categoryListResultSetHandler);
+        } catch (SQLException e) {
+            throw new InternalServerErrorException("Can't execute sql query: " + e.getMessage(), e);
+        }
     }
 
     @Override
-    public List<Producer> listAllProducer() {
-        return null;
+    public List<Producer> listAllProducers() {
+        try (Connection c = dataSource.getConnection()) {
+            return JDBCUtils.select(c, "select * from producer order by id", producerListResultSetHandler);
+        } catch (SQLException e) {
+            throw new InternalServerErrorException("Can't execute sql query: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int countAllProducts() {
+        try(Connection c = dataSource.getConnection()){
+            return JDBCUtils.select(c, "select count(*) from product", countResultSetHandler);// countResultSetHandler - преобразует наш результат запроса в integer
+        }catch (SQLException e){
+            throw new InternalServerErrorException("Can't execute sql query: " + e.getMessage(), e);// создали свой класс исключений для того чтобы оно пробрасывалось в наш фильтр ErrorHandlerFilter и логгировалось
+        }
+    }
+
+    @Override
+    public int countProductsByCategory(String categoryUrl) {
+        return 0;
     }
 }

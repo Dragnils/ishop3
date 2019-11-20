@@ -10,9 +10,15 @@ public interface ProductService {
 
     List<Product> listAllProducts(int page, int limit);
 
+    int countAllProducts();// возвращать количество продуктов, для того чтобы показывать кнопку "Load More" или нет
+
+
     List<Product> listProductsByCategory(String categoryUrl, int page, int limit);
 
-    List<Category> listAllCategory();
-    List<Producer> listAllProducer();
+    int countProductsByCategory(String categoryUrl);// будет возвращать количество продуктов по категориям
+
+    List<Category> listAllCategories();
+    List<Producer> listAllProducers();
+
 
 }

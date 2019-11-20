@@ -83,12 +83,21 @@
 	var loadMoreProducts = function (){ // настройка поведения кнопки при нажатии
 		var btn = $('#loadMore');
 		convertButtonToLoader(btn, 'btn-success');
-		var url = '/ajax/html/more' + location.pathname + '?' + location.search.substring(1);
+		var pageNumber = parseInt($('#productList').attr('data-page-number'));// считываем параметры страницы product.jsp и передаем их на сервер
+		var url = '/ajax/html/more' + location.pathname + '?page=' + (pageNumber + 1) + '&' + location.search.substring(1);// считали страницу 1 и при нажатии кнопки мы отправляем на сервер ajax запрос и в запросе указать page текущую + 1
 		$.ajax({
 			url : url,
 			success : function(html) {
-				$('#productList .text-center').prepend(html);
-				convertLoaderToButton(btn, 'btn-success', loadMoreProducts);
+				$('#productList .row').append(html);
+				pageNumber= pageNumber +1;
+				var pageCount = parseInt($('#productList').attr('data-page-count'));// считываем параметры страницы product.jsp и передаем их на сервер
+				if(pageNumber < pageCount){
+					$('#productList').attr('data-page-number', pageNumber) // обнавляем текущую страницу
+					convertLoaderToButton(btn, 'btn-success', loadMoreProducts);
+				}else { // pageNumber >=  pageCount означает что мы достигли предела отображения данных на странице
+					btn.remove();
+				}
+
 			},
 			error : function(data) {
 				convertLoaderToButton(btn, 'btn-success', loadMoreProducts);
