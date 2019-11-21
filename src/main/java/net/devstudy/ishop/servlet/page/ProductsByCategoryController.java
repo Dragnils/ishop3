@@ -21,6 +21,10 @@ public class ProductsByCategoryController  extends AbstractController {// ото
         String categoryUrl = req.getRequestURI().substring(SUBSTRING_INDEX);// чтобы получить текущую категорию
         List<Product> products = getProductService().listProductsByCategory(categoryUrl,1 , Constants.MAX_PRODUCTS_PER_HTML_PAGE); //get Products from database, мы должны получить из БД список всех категорий
         req.setAttribute("products", products);
+
+        int totalCount = getProductService().countProductsByCategory(categoryUrl);// возвращает кол-во продуктов по категориям
+        req.setAttribute("pageCount", getPageCount(totalCount, Constants.MAX_PRODUCTS_PER_HTML_PAGE));
+
         req.setAttribute("selectedCategoryUrl", categoryUrl);// сохраняем текущую выбранную категорию ? для того чотбы подсвечивала синим цветом выбранную категорию
         RoutingUtils.forwardToPage("products.jsp", req,resp);
     }

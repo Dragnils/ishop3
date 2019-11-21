@@ -52,4 +52,11 @@ public class SearchForm {
     public void setProducer(List<Integer> producer) {
         this.producer = producer;
     }
+
+    public boolean isCategoriesEmpty(){
+        return category.isEmpty();
+    }
+    public boolean isProducersEmpty(){
+        return producer.isEmpty();
+    }
 }

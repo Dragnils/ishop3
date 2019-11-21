@@ -8,6 +8,8 @@
         </encoder>
     </appender>
 
+    <logger name="net.devstudy.ishop.service.impl.ProductServiceImpl" level="debug" /> <!-- для логирования в методах listProductsBySearchForm и countProductsBySearchForm класса ProductServiceImpl -->
+
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
