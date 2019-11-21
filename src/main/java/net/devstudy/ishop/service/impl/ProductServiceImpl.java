@@ -4,6 +4,7 @@ import net.devstudy.ishop.entity.Category;
 import net.devstudy.ishop.entity.Producer;
 import net.devstudy.ishop.entity.Product;
 import net.devstudy.ishop.exception.InternalServerErrorException;
+import net.devstudy.ishop.form.SearchForm;
 import net.devstudy.ishop.jdbc.JDBCUtils;
 import net.devstudy.ishop.jdbc.ResultSetHandler;
 import net.devstudy.ishop.jdbc.ResultSetHandlerFactory;
@@ -87,5 +88,30 @@ class ProductServiceImpl implements ProductService { // реализация
     @Override
     public int countProductsByCategory(String categoryUrl) {
         return 0;
+    }
+
+    @Override
+    public List<Product> listProductsBySearchForm(SearchForm searchForm, int page, int limit) {
+        try(Connection c = dataSource.getConnection()){
+            // запрос на получение продуктов
+            int offset = (page - 1) * limit;                          // as category и as producer чтобы совпадало с названиями колонок в обработчике строк(handle) класса ResultSetHandlerFactory
+            return JDBCUtils.select(c, "select p.*, c.name as category, pr.name as producer from product p, producer pr, category c "
+                    + "where (p.name ilike ? or p.description ilike ?) and c.id=p.id_category and pr.id=p.id_producer limit ? offset ?",
+                    productsResultSetHandler, "%"+searchForm.getQuery()+"%", "%"+searchForm.getQuery()+"%", limit, offset);// productsResultSetHandler - преобразует наш результат запроса в коллекцию listAllProducts
+        }catch (SQLException e){
+            throw new InternalServerErrorException("Can't execute sql query: " + e.getMessage(), e);// создали свой класс исключений для того чтобы оно пробрасывалось в наш фильтр ErrorHandlerFilter и логгировалось
+        }
+    }
+
+    @Override
+    public int countProductsBySearchForm(SearchForm searchForm) {
+        try(Connection c = dataSource.getConnection()){
+            // запрос на получение продуктов
+            return JDBCUtils.select(c, "select count(*) from product p, producer pr, category c "
+                            + "where (p.name ilike ? or p.description ilike ?) and c.id=p.id_category and pr.id=p.id_producer",
+                    countResultSetHandler, "%"+searchForm.getQuery()+"%", "%"+searchForm.getQuery()+"%");// countResultSetHandler -  преобразует наш результат запроса в integer
+        }catch (SQLException e){
+            throw new InternalServerErrorException("Can't execute sql query: " + e.getMessage(), e);// создали свой класс исключений для того чтобы оно пробрасывалось в наш фильтр ErrorHandlerFilter и логгировалось
+        }
     }
 }

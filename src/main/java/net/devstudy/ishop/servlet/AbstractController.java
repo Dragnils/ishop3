@@ -1,5 +1,6 @@
 package net.devstudy.ishop.servlet;
 
+import net.devstudy.ishop.form.SearchForm;
 import net.devstudy.ishop.service.OrderService;
 import net.devstudy.ishop.service.ProductService;
 import net.devstudy.ishop.service.impl.ServiceManager;
@@ -45,6 +46,13 @@ public abstract class AbstractController extends HttpServlet {
             return 1;
         }
 
+    }
+
+    public final SearchForm createSearchForm(HttpServletRequest request) { // извлекает данный объект формы SearchForm из request
+        return new SearchForm(
+                request.getParameter("query"),
+                request.getParameterValues("category"),
+                request.getParameterValues("producer"));
     }
 
 }

@@ -3,6 +3,7 @@ package net.devstudy.ishop.service;
 import net.devstudy.ishop.entity.Category;
 import net.devstudy.ishop.entity.Producer;
 import net.devstudy.ishop.entity.Product;
+import net.devstudy.ishop.form.SearchForm;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public interface ProductService {
 
     List<Category> listAllCategories();
     List<Producer> listAllProducers();
+
+    List<Product> listProductsBySearchForm(SearchForm searchForm, int page, int limit);
+
+    int countProductsBySearchForm(SearchForm searchForm);
 
 
 }

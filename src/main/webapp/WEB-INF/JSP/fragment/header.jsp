@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/products">IShop</a>
+            <a class="navbar-brand" href="/ishop3_war/products">IShop</a>
         </div>
         <div class="collapse navbar-collapse" id="ishopNav">
             <ul id="currentShoppingCart" class="nav navbar-nav navbar-right hidden">
@@ -20,7 +20,7 @@
                     <div class="dropdown-menu shopping-cart-desc">
                         Total count: <span class="total-count">0</span><br>
                         Total cost: <span class="total-cost">0</span><br>
-                        <a href="/shopping-cart" class="btn btn-primary btn-block">View cart</a>
+                        <a href="/ishop3_war/shopping-cart" class="btn btn-primary btn-block">View cart</a>
                     </div>
                 </li>
             </ul>

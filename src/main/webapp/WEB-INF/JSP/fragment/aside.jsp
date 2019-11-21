@@ -7,12 +7,12 @@
     <a data-toggle="collapse" href="#findProducts">Find products <span class="caret"></span></a>
 </div>
 <!-- Search form -->
-<form class="search" action="/search">
+<form class="search" action="/ishop3_war/search">
     <div id="findProducts" class="panel panel-success collapse">
         <div class="panel-heading">Find products</div>
         <div class="panel-body">
             <div class="input-group">
-                <input type="text" name="query" class="form-control" placeholder="Search query">
+                <input type="text" name="query" class="form-control" placeholder="Search query" value="${searchForm.query}">
                 <span class="input-group-btn">
 					<a id="goSearch" class="btn btn-default">Go!</a>
 				</span>

@@ -89,7 +89,7 @@
 			url : url,
 			success : function(html) {
 				$('#productList .row').append(html);
-				pageNumber= pageNumber +1;
+				pageNumber= pageNumber++;
 				var pageCount = parseInt($('#productList').attr('data-page-count'));// считываем параметры страницы product.jsp и передаем их на сервер
 				if(pageNumber < pageCount){
 					$('#productList').attr('data-page-number', pageNumber) // обнавляем текущую страницу
