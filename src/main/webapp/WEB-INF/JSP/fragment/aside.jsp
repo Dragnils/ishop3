@@ -6,7 +6,7 @@
     <a class="pull-right" data-toggle="collapse" href="#productCatalog">Product catalog <span class="caret"></span></a>
     <a data-toggle="collapse" href="#findProducts">Find products <span class="caret"></span></a>
 </div>
-<!-- Search form -->
+<%-- Search form --%>
 <form class="search" action="/ishop3_war/search">
     <div id="findProducts" class="panel panel-success collapse">
         <div class="panel-heading">Find products</div>
@@ -21,14 +21,14 @@
                 <a data-toggle="collapse" href="#searchOptions">More filters <span class="caret"></span></a>
             </div>
         </div>
-        <div id="searchOptions" class="collapse">
-            <ishop:category-filter categories="${applicationScope.CATEGORY_LIST }" />
-            <ishop:producer-filter producers="${applicationScope.PRODUCER_LIST }" />
+        <div id="searchOptions" class="collapse ${!searchForm.categoriesEmpty or !searchForm.producersEmpty ? 'in' : '' }">
+            <ishop:category-filter categories="${applicationScope.CATEGORY_LIST }" searchForm="${searchForm}" />
+            <ishop:producer-filter producers="${applicationScope.PRODUCER_LIST }" searchForm="${searchForm}" />
         </div>
     </div>
 </form>
-<!-- /Search form -->
-<!-- Categories -->
+<%-- /Search form --%>
+<%-- Categories --%>
 <div id="productCatalog" class="panel panel-success collapse">
     <div class="panel-heading">Product catalog</div>
     <div class="list-group">
@@ -39,4 +39,4 @@
         </c:forEach>
     </div>
 </div>
-<!-- /Categories -->
+<%-- /Categories --%>

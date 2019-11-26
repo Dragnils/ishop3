@@ -25,7 +25,7 @@ public class SearchController extends AbstractController {
         int totalCount = getProductService().countProductsBySearchForm(searchForm);// для отображения кнопки
         req.setAttribute("pageCount", getPageCount(totalCount, Constants.MAX_PRODUCTS_PER_HTML_PAGE));
         req.setAttribute("productCount", totalCount);// устанавливает какое-то кол-ыо найденных результатов
-        req.setAttribute("searchForm", searchForm);// для того чтобы в поисковике сохранялось наши прошлые поиски
+        req.setAttribute("searchForm", searchForm);// для того чтобы в поисковике сохранялось наши прошлые поиски m
         RoutingUtils.forwardToPage("search-result.jsp", req, resp);// переходит на страницу
     }
 }
