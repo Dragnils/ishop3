@@ -1,6 +1,6 @@
 package net.devstudy.ishop.util;
 
-import net.devstudy.Constants;
+import net.devstudy.ishop.Constants;
 import net.devstudy.ishop.model.ShoppingCart;
 
 import javax.servlet.http.Cookie;

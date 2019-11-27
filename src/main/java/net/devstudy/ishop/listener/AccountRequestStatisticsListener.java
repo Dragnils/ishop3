@@ -9,7 +9,7 @@ GET /search?name=Test&option1=true&category=1&category=2
 POST /product/add?idProduct=1&count=3
 POST /order */
 
-import net.devstudy.Constants;
+import net.devstudy.ishop.Constants;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;

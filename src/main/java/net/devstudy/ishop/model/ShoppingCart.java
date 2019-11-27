@@ -1,8 +1,7 @@
 package net.devstudy.ishop.model;
 
-import net.devstudy.Constants;
-import net.devstudy.exception.ValidationException;
-import net.devstudy.ishop.model.ShopingCartItem;
+import net.devstudy.ishop.Constants;
+import net.devstudy.ishop.exception.ValidationException;
 
 import java.io.Serializable;
 import java.util.Collection;

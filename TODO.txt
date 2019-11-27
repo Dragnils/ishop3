@@ -8,3 +8,20 @@
 /ajax/html/more/search
 
 /shopping-cart
+
+
+Домашнее задание
+Реализовать методы ProductService:
+
+List listProductsByCategory(String categoryUrl, int page, int limit);
+
+List listAllCategories();
+
+List listAllProducers();
+
+Загрузить коллекции категорий и производителей в IShopApplicationListener при запуске приложения
+
+Модифицировать aside.jsp, чтобы отображать категории и производителей из коллекций, загруженных в IShopApplicationListener
+
+Модифицировать ProductsByCategoryController и ProductsByCategoryMoreController для отображения продуктов по категориям
+

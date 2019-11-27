@@ -10,7 +10,6 @@
     </div>
     <c:if test="${pageCount > 1}"> <%--pageCount из класса AllProductsController. если больше 1 то отображаем кнопку --%>
     <div class="text-center hidden-print">
-       <%-- <img id="loadMoreIndicator" src="${pageContext.request.contextPath}/static/img/loading.gif" class="hidden" alt="Loading...">--%>
         <a id="loadMore" class="btn btn-success">Load more products</a>
     </div>
     </c:if>

@@ -7,7 +7,7 @@ package net.devstudy.ishop.listener;
  */
 
 
-import net.devstudy.Constants;
+import net.devstudy.ishop.Constants;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;

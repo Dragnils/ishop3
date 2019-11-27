@@ -22,8 +22,8 @@
             </div>
         </div>
         <div id="searchOptions" class="collapse ${!searchForm.categoriesEmpty or !searchForm.producersEmpty ? 'in' : '' }">
-            <ishop:category-filter categories="${applicationScope.CATEGORY_LIST }" searchForm="${searchForm}" />
-            <ishop:producer-filter producers="${applicationScope.PRODUCER_LIST }" searchForm="${searchForm}" />
+            <ishop:category-filter categories="${CATEGORY_LIST }" searchForm="${searchForm}" />
+            <ishop:producer-filter producers="${PRODUCER_LIST }" searchForm="${searchForm}" />
         </div>
     </div>
 </form>
@@ -32,8 +32,8 @@
 <div id="productCatalog" class="panel panel-success collapse">
     <div class="panel-heading">Product catalog</div>
     <div class="list-group">
-        <c:forEach var="category" items="${applicationScope.CATEGORY_LIST}">
-            <a href="/ishop3_war/products${category.url }" class="list-group-item ${applicationScope.selectedCategoryUrl == category.url ? 'active' : '' }">
+        <c:forEach var="category" items="${CATEGORY_LIST }">
+            <a href="/ishop3_war/products${category.url }" class="list-group-item ${selectedCategoryUrl == category.url ? 'active' : '' }">
                 <span class="badge">${category.productCount}</span> ${category.name}
             </a>
         </c:forEach>

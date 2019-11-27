@@ -17,13 +17,13 @@
         </thead>
         <tbody>
         <tr id="product278009" class="item">
-            <td class="text-center"><img class="small" src="${pageContext.request.contextPath}/media/prestigio.jpg" alt="Prestigio SH398187"><br>Prestigio SH398187</td>
+            <td class="text-center"><img class="small" src="/media/736d61727470686f6e65.jpg" alt="Prestigio SH398187"><br>Prestigio SH398187</td>
             <td class="price">$ 570.00</td>
             <td class="count">1</td>
             <td class="hidden-print"><a class="btn btn-danger remove-product" data-id-product="278009" data-count="1">Remove one</a></td>
         </tr>
         <tr id="product278014" class="item">
-            <td class="text-center"><img class="small" src="${pageContext.request.contextPath}/media/evromedia.jpg" alt="EvroMedia NU6353951"><br>EvroMedia NU6353951</td>
+            <td class="text-center"><img class="small" src="/media/652d626f6f6b.jpg" alt="EvroMedia NU6353951"><br>EvroMedia NU6353951</td>
             <td class="price">$ 2710.00</td>
             <td class="count">2</td>
             <td class="hidden-print"><a class="btn btn-danger remove-product" data-id-product="278014" data-count="1">Remove one</a><br>

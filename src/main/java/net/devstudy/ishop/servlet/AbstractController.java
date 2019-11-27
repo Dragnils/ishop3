@@ -8,7 +8,6 @@ import net.devstudy.ishop.service.impl.ServiceManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public abstract class AbstractController extends HttpServlet {
 
@@ -32,7 +31,7 @@ public abstract class AbstractController extends HttpServlet {
 
     public final int getPageCount(int totalCount, int itemsPerPage){// для преобразования общего количества страниц в зависимости от totalCount
         int result = totalCount / itemsPerPage;
-        if(result * itemsPerPage!= totalCount){
+        if(result * itemsPerPage != totalCount){
             result++;
         }
         return result;
