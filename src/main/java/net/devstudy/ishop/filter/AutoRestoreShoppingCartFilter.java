@@ -3,11 +3,15 @@ package net.devstudy.ishop.filter;
 /* Написать фильтр, который десериализует состояние корзины, если корзина отсутствует, а cookie
 присутствуют. Выполнить десериализацию для новой сессии только один раз! */
 
-import net.devstudy.ishop.model.ShopingCartItem;
+import net.devstudy.ishop.form.ProductForm;
 import net.devstudy.ishop.model.ShoppingCart;
+import net.devstudy.ishop.service.OrderService;
+import net.devstudy.ishop.service.impl.ServiceManager;
 import net.devstudy.ishop.util.SessionUtils;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +22,13 @@ import java.io.IOException;
 public class AutoRestoreShoppingCartFilter extends AbstractFilter {
     //чтобы выполнянлось проверка только один раз, будем использовать подход связанный со хранением атрибутов сессии
     private static final String SHOPPING_CARD_DESERIALIZATION_DONE = "SHOPPING_CARD_DESERIALIZATION_DONE";
+
+    private OrderService orderService;
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        orderService = ServiceManager.getInstance(filterConfig.getServletContext()).getOrderService();// получаем ссылку orderService
+    }
 
 
     @Override
@@ -39,7 +50,7 @@ public class AutoRestoreShoppingCartFilter extends AbstractFilter {
 
 
     //серилизация
-    protected String shoppingCartToString(ShoppingCart shoppingCart) {
+    /*protected String shoppingCartToString(ShoppingCart shoppingCart) {
         StringBuilder res = new StringBuilder();
         for (ShopingCartItem shoppingCartItem : shoppingCart.getItems()) {
             res.append(shoppingCartItem.getIdProduct()).append("-").append(shoppingCartItem.getCount()).append("|");
@@ -48,7 +59,7 @@ public class AutoRestoreShoppingCartFilter extends AbstractFilter {
             res.deleteCharAt(res.length() - 1);
         }
         return res.toString();
-    }
+    }*/
 
     //десерилизация
     protected ShoppingCart shoppingCartFromString(String cookieValue) {
@@ -59,7 +70,7 @@ public class AutoRestoreShoppingCartFilter extends AbstractFilter {
             try {
                 int idProduct = Integer.parseInt(data[0]);
                 int count = Integer.parseInt(data[1]);
-                shoppingCart.addProduct(idProduct, count);
+                orderService.addProductToShoppingCart(new ProductForm(idProduct, count), shoppingCart);
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }

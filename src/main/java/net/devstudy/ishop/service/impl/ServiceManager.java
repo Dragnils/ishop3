@@ -54,7 +54,7 @@ public class ServiceManager {
             loadApplicationProperties();
             dataSource = createDataSource();//-- должен быть всегда после  loadApplicationProperties();
             productService = new ProductServiceImpl(dataSource);//--
-            orderService = new OrderServiceImpl();
+            orderService = new OrderServiceImpl(dataSource);
     }
 
     private BasicDataSource createDataSource(){

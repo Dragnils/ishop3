@@ -33,18 +33,26 @@
 	var addProductToCart = function (){
 		var idProduct = $('#addProductPopup').attr('data-id-product');
 		var count = $('#addProductPopup .count').val();
-		$('#addToCart').addClass('hidden');
-		$('#addToCartIndicator').removeClass('hidden');
-		setTimeout(function(){
-			var data = {
-				totalCount : count,
-				totalCost : 2000
-			};
-			$('#currentShoppingCart .total-count').text(data.totalCount);
-			$('#currentShoppingCart .total-cost').text(data.totalCost);
-			$('#currentShoppingCart').removeClass('hidden');
-			$('#addProductPopup').modal('hide');
-		}, 800);
+		var btn = $('#addToCart');
+		convertButtonToLoader(btn, 'btn-primary');
+		$.ajax({
+			url : '/ajax/json/product/add',
+			method : 'POST',
+			data :{
+				idProduct : idProduct,
+				count : count
+			},
+			success : function(data) {
+				$('#currentShoppingCart .total-count').text(data.totalCount);
+				$('#currentShoppingCart .total-cost').text(data.totalCost);
+				$('#currentShoppingCart').removeClass('hidden');
+				$('#addProductPopup').modal('hide');
+			},
+			error : function(data) {
+				convertLoaderToButton(btn, 'btn-primary', addProductToCart);
+				alert('Error');
+			}
+		});
 	};
 	var calculateCost = function(){
 		var priceStr = $('#addProductPopup .price').text();

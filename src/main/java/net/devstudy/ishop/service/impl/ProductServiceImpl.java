@@ -144,7 +144,6 @@ class ProductServiceImpl implements ProductService { // реализация
     @Override
     public int countProductsBySearchForm(SearchForm searchForm) {
         try(Connection c = dataSource.getConnection()){
-
             SearchQuery sq = buildSearchQuery("count(*)", searchForm);
             LOGGER.debug("search query={} with params={}", sq.getSql(), sq.getParams());//для того чтобы узнать какой запрос генерируется
             return JDBCUtils.select(c, sq.getSql().toString(), countResultSetHandler, sq.getParams().toArray());  // запрос на получение продуктов

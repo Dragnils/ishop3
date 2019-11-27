@@ -11,7 +11,7 @@
             </button>
             <a class="navbar-brand" href="/ishop3_war/products">IShop</a>
         </div>
-        <div class="collapse navbar-collapse" id="ishopNav">
+        <div class="collapse navbar-collapse" id="ishopNfav">
             <ul id="currentShoppingCart" class="nav navbar-nav navbar-right hidden">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
